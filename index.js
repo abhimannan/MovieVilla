@@ -25,7 +25,7 @@ const multer  = require('multer');
 let {storage} = require("./cloudconfig.js");
 const upload = multer({ storage });
 
-// let dbUrl = process.env.ATLASDB_URL;
+let dbUrl = process.env.ATLASDB_URL;
 
 // DB connection
 // getting-started.js
@@ -76,20 +76,20 @@ let reviewJoiValidation = (req, res, next) => {
   }
 };
 
-// let store = MongoStore.create({
-//     mongoUrl : dbUrl,
-//     crypto : {
-//         secret : process.env.SECRETE,
-//     },
-//     touchAfter : 24 * 3600,
-// });
+let store = MongoStore.create({
+    mongoUrl : dbUrl,
+    crypto : {
+        secret : process.env.SECRETE,
+    },
+    touchAfter : 24 * 3600,
+});
 
-// store.on("error",()=>{
-//     console.log("ERROR ON MONGO SESSION STORE",err);
-// });
+store.on("error",()=>{
+    console.log("ERROR ON MONGO SESSION STORE",err);
+});
 
 let sessionOptions = {
-    // store,
+    store,
   secret: process.env.SECRETE,
   resave: false,
   saveUninitialized: true,
