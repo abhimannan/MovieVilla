@@ -5,34 +5,26 @@ body {
 }
 
 .movie-card {
-    background-color: #ffffff;
-    border-radius: 12px;
-    transition: transform 0.3s ease-in-out;
-    border: 1px solid #ddd;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fefefe;
+    border: none;
 }
 
 .movie-card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-.card-body {
-    padding: 20px;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .movie-title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #2c3e50;
-    margin-bottom: 10px;
+    font-size: 1.25rem;
+    color: #333;
 }
 
 .card-detail {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #555;
-    margin: 4px 0;
+    font-size: 0.95rem;
+    color: #666;
 }
+
 
 /* showMovie.ejs */
 .movie-card {
