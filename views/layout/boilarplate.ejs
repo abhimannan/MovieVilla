@@ -13,12 +13,13 @@
 </head>
 <body>
     
-   <h1>Navbar</h1>
+   <%- include("../includeS/navbar.ejs") %>
 
   <h4><%= success %></h4>
   <h4><%= error %></h4>
     <%- body -%>
 
+   <%- include("../includeS/footer.ejs") %>
 
 <script>
   // Bootstrap custom validation
