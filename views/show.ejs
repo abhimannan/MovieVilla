@@ -1,20 +1,22 @@
 <% layout('./layout/boilarplate.ejs') -%>
 
-<div class="card-container">
-    
-    <% for(let movie of movies) { %>
-        <a href="/movies/<%= movie._id %>">
-        <div class="card">
-            <img width="250px" height="250px" src="<%= movie.imageURL.url %>" alt="<%= movie.title %>">
-            <h3><%= movie.title %></h3>
-            <p><strong>Director:</strong> <%= movie.director %></p>
-            <p><strong>Rating:</strong> <%= movie.rating %></p>
-            <p><strong>Hero:</strong> <%= movie.hero %></p>
-        </div>
-        </a>
-    <% } %>
-    
-    
+<div class="container my-5">
+    <h3 style="color : rgb(75, 75, 73)">All The Movies..</h3>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+        <% for(let movie of movies) { %>
+            <div class="col">
+                <a href="/movies/<%= movie._id %>" class="text-decoration-none text-dark">
+                    <div class="card h-100 movie-card shadow">
+                        <img src="<%= movie.imageURL.url %>" class="card-img-top" alt="<%= movie.title %>" style="height: 250px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title movie-title"><%= movie.title %></h5>
+                            <p class="card-detail"><strong>Director:</strong> <%= movie.director %></p>
+                            <p class="card-detail"><strong>Rating:</strong> <%= movie.rating %></p>
+                            <p class="card-detail"><strong>Hero:</strong> <%= movie.hero %></p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        <% } %>
+    </div>
 </div>
-
-

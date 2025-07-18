@@ -25,7 +25,7 @@ const multer  = require('multer');
 let {storage} = require("./cloudconfig.js");
 const upload = multer({ storage });
 
-let dbUrl = process.env.ATLASDB_URL;
+// let dbUrl = process.env.ATLASDB_URL;
 
 // DB connection
 // getting-started.js
@@ -36,7 +36,7 @@ then(()=>{
 .catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect(dbUrl);
+  await mongoose.connect('mongodb://127.0.0.1:27017/movieVilla');
   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 }
 
@@ -76,20 +76,20 @@ let reviewJoiValidation = (req, res, next) => {
   }
 };
 
-let store = MongoStore.create({
-    mongoUrl : dbUrl,
-    crypto : {
-        secret : process.env.SECRETE,
-    },
-    touchAfter : 24 * 3600,
-});
+// let store = MongoStore.create({
+//     mongoUrl : dbUrl,
+//     crypto : {
+//         secret : process.env.SECRETE,
+//     },
+//     touchAfter : 24 * 3600,
+// });
 
-store.on("error",()=>{
-    console.log("ERROR ON MONGO SESSION STORE",err);
-});
+// store.on("error",()=>{
+//     console.log("ERROR ON MONGO SESSION STORE",err);
+// });
 
 let sessionOptions = {
-    store,
+    // store,
   secret: process.env.SECRETE,
   resave: false,
   saveUninitialized: true,
@@ -221,7 +221,7 @@ app.get("/session",(req,resp)=>{
 
 // home route
 app.get("/home",(req,resp)=>{
-    resp.render("index.ejs");
+    resp.render("home.ejs");
 });
 
 // CRUD
@@ -318,6 +318,19 @@ app.delete("/movies/:id",
     req.flash("success","Movie is deleted!!");
     resp.redirect("/movies");
 }));
+// find searched movie
+app.get("/search", async (req, resp) => {
+    let query = req.query.query;
+    let findMovie = await Movie.find({ title: query });
+
+    if (findMovie.length === 0) {
+        req.flash("error", "Movie not found!");
+        return resp.redirect("/movies"); // redirect to all movies or wherever you want
+    }
+
+    resp.render("SeachedMovie.ejs", { findMovie });
+});
+
 
 // let addReview = async()=>{
 //     let data = new Review({

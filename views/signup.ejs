@@ -3,7 +3,7 @@
 <div class="container my-5">
   <h2 class="text-center mb-4">Signup</h2>
   <form action="/signup" method="POST" class="needs-validation" novalidate>
-    
+
     <div class="mb-3">
       <label for="username" class="form-label">Enter Username</label>
       <input type="text" class="form-control" name="user[username]" id="username" required>
@@ -12,16 +12,19 @@
 
     <div class="mb-3">
       <label for="email" class="form-label">Enter Email</label>
-      <input type="email" class="form-control" name="user[email]" id="email">
+      <input type="email" class="form-control" name="user[email]" id="email" required>
       <div class="invalid-feedback">Please enter a valid email</div>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-4">
       <label for="password" class="form-label">Enter Password</label>
-      <input type="password" class="form-control" name="user[password]" id="email">
+      <input type="password" class="form-control" name="user[password]" id="password" required>
       <div class="invalid-feedback">Please enter a valid password</div>
     </div>
 
-    <button type="submit">signin</button>
-    </form>
+    <div class="d-grid">
+      <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+    </div>
+    
+  </form>
 </div>

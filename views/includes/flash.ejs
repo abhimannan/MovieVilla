@@ -1,0 +1,32 @@
+<!-- Success message flash -->
+<% if(success && success.length){ %>
+    <div class="alert alert-success alert-dismissible fade show col-6 offset-3" role="alert"
+    style="padding: 15px;
+           font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+           font-weight:bolder;
+           color:red;
+    "
+    
+  >
+    <%= success %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        <span style="color:red" aria-hidden="true">&times;</span>
+      </button>
+</div>
+<% } %>
+
+<!-- Failure message flash -->
+<% if(error && error.length){ %>
+  <div class="alert alert-danger alert-dismissible fade show col-6 offset-3" role="alert"
+  style="padding: 15px;
+         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+         font-weight:bolder;
+         color:rgb(15, 14, 14);
+  "
+>
+  <%= error %>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+      <span style="color:red" aria-hidden="true">&times;</span>
+    </button>
+</div>
+<% } %>

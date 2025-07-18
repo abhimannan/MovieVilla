@@ -1,57 +1,83 @@
 <% layout('./layout/boilarplate.ejs') -%>
 
 <div class="container my-5">
+
+  <!-- Movie Card -->
   <div class="row justify-content-center">
     <div class="col-12 col-md-10 col-lg-8">
       <div class="card shadow movie-card">
-        <img src="<%= movie.imageURL.url %>" class="card-img-top img-fluid" alt="<%= movie.title %>">
+        <img src="<%= movie.imageURL.url %>" class="card-img-top img-fluid" alt="<%= movie.title %>" style="max-height: 400px; object-fit: cover;">
         <div class="card-body text-center">
-          <h4 class="card-title mb-3"><%= movie.title %></h4>
-     
-            <p>OWNER: <%= movie.owner.username %></p>
+          <h4 class="card-title mb-3 text-primary fw-bold"><%= movie.title %></h4>
+          <p class="mb-1"><strong>Owner:</strong> @<%= movie.owner.username %></p>
+          <p class="mb-1"><strong>Director:</strong> <%= movie.director %></p>
+          <p class="mb-1"><strong>Rating:</strong> <%= movie.rating %></p>
+          <p class="mb-3"><strong>Hero:</strong> <%= movie.hero %></p>
 
-          <p class="card-text"><strong>Director:</strong> <%= movie.director %></p>
-          <p class="card-text"><strong>Rating:</strong> <%= movie.rating %></p>
-          <p class="card-text"><strong>Hero:</strong> <%= movie.hero %></p>
-      <% if(currUser && movie.owner._id.equals(currUser._id)) { %>
-          <a href="/movies/<%= movie._id %>/edit">Edit</a>
-
-          <form method="POST" action="/movies/<%= movie._id %>?_method=DELETE">
-              <button type="submit">Delete</button>
-          </form> 
+          <% if(currUser && movie.owner._id.equals(currUser._id)) { %>
+            <a href="/movies/<%= movie._id %>/edit" class="btn btn-outline-primary btn-sm me-2">Edit</a>
+            <form method="POST" action="/movies/<%= movie._id %>?_method=DELETE" class="d-inline">
+              <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+            </form>
           <% } %>
         </div>
       </div>
     </div>
   </div>
-  <% if(currUser) { %>
-  <form action="/movies/<%= movie._id %>/reviews" method="post" class="needs-validation" novalidate>
-    <div class="mb-3">
-      <label for="description" class="form-label">Give Feedback</label>
-      <input type="text" class="form-control" name="review[description]" id="description" required>
-      <div class="invalid-feedback">Please enter a description.</div>
-    </div>
 
-    <div class="mb-3">
-      <label for="rating" class="form-label">Enter rating</label>
-      <input type="number" class="form-control" name="review[rating]" id="rating">
-      <div class="invalid-feedback">Please enter a valid rating</div>
-    </div>
-  <button type="submit">Add Review</button>
-</form>
-<% } %>
-  <div class="display-reviews">
-    <% for(let review of movie.reviews) { %>
-      <div class="reveiw" style="border : 2px solid red">
-        <p>@<%= review.author.username %></p><br>
-         <p><%= review.description %></p><br>
-         <p><%= review.rating %></p>
-         <form method="POST" action="/movies/<%= movie._id %>/reviews/<%= review._id %>?_method=DELETE">
-             <button type="submit">Delete</button>
-         </form>
+  <!-- Review Form -->
+  <% if(currUser) { %>
+  <div class="row justify-content-center mt-5">
+    <div class="col-12 col-md-10 col-lg-8">
+      <div class="card p-4 shadow-sm">
+        <h5 class="mb-3">Add a Review</h5>
+        <form action="/movies/<%= movie._id %>/reviews" method="post" class="needs-validation" novalidate>
+          <div class="mb-3">
+            <label for="description" class="form-label">Your Feedback</label>
+            <input type="text" class="form-control" name="review[description]" id="description" required>
+            <div class="invalid-feedback">Please enter a description.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="rating" class="form-label">Rating (1 to 10)</label>
+            <input type="number" class="form-control" name="review[rating]" id="rating" min="1" max="10" required>
+            <div class="invalid-feedback">Please enter a valid rating.</div>
+          </div>
+
+          <button type="submit" class="btn btn-success">Add Review</button>
+        </form>
       </div>
-    <% } %>
-      
+    </div>
   </div>
+  <% } %>
+
+  <!-- Display Reviews -->
+<div class="row justify-content-center mt-5">
+  <div class="col-12 col-md-10 col-lg-8">
+    <h5 class="mb-4">Reviews</h5>
+
+    <% if(movie.reviews.length === 0) { %>
+      <p class="text-muted">No reviews yet.</p>
+    <% } %>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <% for(let review of movie.reviews) { %>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">@<%= review.author.username %></h6>
+              <p class="card-text mb-1"><%= review.description %></p>
+              <p class="card-text"><strong>Rating:</strong> <%= review.rating %>/10</p>
+              <form method="POST" action="/movies/<%= movie._id %>/reviews/<%= review._id %>?_method=DELETE">
+                <button type="submit" class="btn btn-sm btn-outline-danger w-100">Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      <% } %>
+    </div>
+    
+  </div>
+</div>
 
 </div>

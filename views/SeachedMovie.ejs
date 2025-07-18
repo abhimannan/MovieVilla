@@ -1,0 +1,22 @@
+<% layout('./layout/boilarplate.ejs') -%>
+
+<div class="container my-5">
+    <h3>Your Searching Result...</h3>
+  <div class="row g-4 justify-content-center mt-2">
+    <% for (let movie of findMovie) { %>
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <img src="<%= movie.imageURL.url %>" class="card-img-top" alt="movie image" style="height: 250px; object-fit: cover;">
+          <div class="card-body text-center">
+            <h5 class="card-title fw-bold text-primary"><%= movie.title %></h5>
+            <p class="card-text"><strong>Director:</strong> <%= movie.director %></p>
+            <p class="card-text"><strong>Rating:</strong> <%= movie.rating %> ⭐</p>
+          </div>
+          <div class="card-footer text-center">
+            <a href="/movies/<%= movie._id %>" class="btn btn-warning px-4">View Details</a>
+          </div>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>

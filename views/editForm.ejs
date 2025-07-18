@@ -1,26 +1,58 @@
 <% layout('./layout/boilarplate.ejs') -%>
 
-<form action="/movies/<%= data._id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
-    <div class="title">
-        <label for="title">Enter Title</label>
-        <input type="text" name="Movie[title]" id="title" value="<%= data.title %>">
+<div class="container my-5">
+  <h2 class="text-center mb-4">Edit Movie</h2>
+  <form action="/movies/<%= data._id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+
+    <div class="col-md-6">
+      <label for="title" class="form-label">Enter Title</label>
+      <input type="text" class="form-control" name="Movie[title]" id="title" value="<%= data.title %>" required>
+      <div class="invalid-feedback">Please enter a title</div>
     </div>
-    <div class="imageURL">
-        <label for="title">Enter Image</label>
-        <img width="250px" height="250px" src="<%= data.imageURL.url %>">
-        <input type="file" name="Movie[imageURL]" id="imageURL" value="<%= data.imageURL.url %>">
+
+    <div class="col-md-6">
+      <label for="imageURL" class="form-label">Upload New Image</label><br>
+      <img src="<%= data.imageURL.url %>" alt="Current Image" class="img-thumbnail mb-2" width="250" height="250">
+      <input type="file" class="form-control" name="Movie[imageURL]" id="imageURL">
     </div>
-    <div class="director">
-        <label for="director">Enter Director</label>
-        <input type="text" name="Movie[director]" id="director" value="<%= data.director %>">
+
+    <div class="col-md-6">
+      <label for="director" class="form-label">Enter Director</label>
+      <input type="text" class="form-control" name="Movie[director]" id="director" value="<%= data.director %>" required>
+      <div class="invalid-feedback">Please enter a director name</div>
     </div>
-    <div class="rating">
-        <label for="director">Enter Rating</label>
-        <input type="number" name="Movie[rating]" id="rating" value="<%= data.rating %>">
+
+    <div class="col-md-6">
+      <label for="rating" class="form-label">Enter Rating</label>
+      <input type="number" class="form-control" name="Movie[rating]" id="rating" value="<%= data.rating %>" required>
+      <div class="invalid-feedback">Please enter a valid rating</div>
     </div>
-    <div class="hero">
-        <label for="hero">Enter Hero Name</label>
-        <input type="text" name="Movie[hero]" id="hero" value="<%= data.hero %>">
+
+    <div class="col-md-12">
+      <label for="hero" class="form-label">Enter Hero Name</label>
+      <input type="text" class="form-control" name="Movie[hero]" id="hero" value="<%= data.hero %>" required>
+      <div class="invalid-feedback">Please enter hero name</div>
     </div>
-    <button type="submit">Add New Data</button>
-</form>
+
+    <div class="col-12 text-center mt-4">
+      <button type="submit" class="btn btn-success px-4">Update Movie</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  // Bootstrap validation script
+  (() => {
+    'use strict'
+    const forms = document.querySelectorAll('.needs-validation')
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+        form.classList.add('was-validated')
+      }, false)
+    })
+  })()
+</script>

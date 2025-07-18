@@ -1,5 +1,36 @@
-<% layout('./layout/boilarplate.ejs') -%>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark shadow-sm sticky-top" style="height: 70px;">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold text-warning" href="/movies">
+      <i class="fa fa-film me-2" aria-hidden="true"></i>MovieVilla
+    </a>
 
-<div>
-    <h2>This is footer</h2>
-</div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" href="/home">Home</a>
+        <a class="nav-link" href="/movies">All Movies</a>
+        <a class="nav-link" href="/movies/new">Add New Movie</a>
+      </div>
+
+      <!-- Search bar -->
+      <form class="d-flex mx-3" role="search" action="/search" method="GET">
+        <input class="form-control me-2" type="search" name="query" placeholder="Search Movies" aria-label="Search">
+        <button class="btn btn-outline-warning" type="submit">Search</button>
+      </form>
+
+      <div class="navbar-nav ms-auto">
+        <% if (!currUser) { %>
+          <a class="nav-link" href="/signup">Sign Up</a>
+          <a class="nav-link" href="/login">Login</a>
+        <% } %>
+        <% if (currUser) { %>
+          <a class="nav-link text-danger fw-semibold" href="/logout">Logout</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
