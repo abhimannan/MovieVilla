@@ -1,0 +1,57 @@
+<% layout('./layout/boilarplate.ejs') -%>
+
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      <div class="card shadow movie-card">
+        <img src="<%= movie.imageURL.url %>" class="card-img-top img-fluid" alt="<%= movie.title %>">
+        <div class="card-body text-center">
+          <h4 class="card-title mb-3"><%= movie.title %></h4>
+     
+            <p>OWNER: <%= movie.owner.username %></p>
+
+          <p class="card-text"><strong>Director:</strong> <%= movie.director %></p>
+          <p class="card-text"><strong>Rating:</strong> <%= movie.rating %></p>
+          <p class="card-text"><strong>Hero:</strong> <%= movie.hero %></p>
+      <% if(currUser && movie.owner._id.equals(currUser._id)) { %>
+          <a href="/movies/<%= movie._id %>/edit">Edit</a>
+
+          <form method="POST" action="/movies/<%= movie._id %>?_method=DELETE">
+              <button type="submit">Delete</button>
+          </form> 
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% if(currUser) { %>
+  <form action="/movies/<%= movie._id %>/reviews" method="post" class="needs-validation" novalidate>
+    <div class="mb-3">
+      <label for="description" class="form-label">Give Feedback</label>
+      <input type="text" class="form-control" name="review[description]" id="description" required>
+      <div class="invalid-feedback">Please enter a description.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="rating" class="form-label">Enter rating</label>
+      <input type="number" class="form-control" name="review[rating]" id="rating">
+      <div class="invalid-feedback">Please enter a valid rating</div>
+    </div>
+  <button type="submit">Add Review</button>
+</form>
+<% } %>
+  <div class="display-reviews">
+    <% for(let review of movie.reviews) { %>
+      <div class="reveiw" style="border : 2px solid red">
+        <p>@<%= review.author.username %></p><br>
+         <p><%= review.description %></p><br>
+         <p><%= review.rating %></p>
+         <form method="POST" action="/movies/<%= movie._id %>/reviews/<%= review._id %>?_method=DELETE">
+             <button type="submit">Delete</button>
+         </form>
+      </div>
+    <% } %>
+      
+  </div>
+
+</div>

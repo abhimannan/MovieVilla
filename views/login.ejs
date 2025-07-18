@@ -1,0 +1,21 @@
+<% layout('./layout/boilarplate.ejs') -%>
+
+<div class="container my-5">
+  <h2 class="text-center mb-4">Login</h2>
+  <form action="/login" method="POST" class="needs-validation" novalidate>
+    
+    <div class="mb-3">
+      <label for="username" class="form-label">Enter Username</label>
+      <input type="text" class="form-control" name="username" id="username" required>
+      <div class="invalid-feedback">Please enter a Username</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Enter Password</label>
+      <input type="password" class="form-control" name="password" id="password">
+      <div class="invalid-feedback">Please enter a valid password</div>
+    </div>
+
+    <button type="submit">Login</button>
+    </form>
+</div>

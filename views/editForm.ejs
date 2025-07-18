@@ -1,0 +1,26 @@
+<% layout('./layout/boilarplate.ejs') -%>
+
+<form action="/movies/<%= data._id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
+    <div class="title">
+        <label for="title">Enter Title</label>
+        <input type="text" name="Movie[title]" id="title" value="<%= data.title %>">
+    </div>
+    <div class="imageURL">
+        <label for="title">Enter Image</label>
+        <img width="250px" height="250px" src="<%= data.imageURL.url %>">
+        <input type="file" name="Movie[imageURL]" id="imageURL" value="<%= data.imageURL.url %>">
+    </div>
+    <div class="director">
+        <label for="director">Enter Director</label>
+        <input type="text" name="Movie[director]" id="director" value="<%= data.director %>">
+    </div>
+    <div class="rating">
+        <label for="director">Enter Rating</label>
+        <input type="number" name="Movie[rating]" id="rating" value="<%= data.rating %>">
+    </div>
+    <div class="hero">
+        <label for="hero">Enter Hero Name</label>
+        <input type="text" name="Movie[hero]" id="hero" value="<%= data.hero %>">
+    </div>
+    <button type="submit">Add New Data</button>
+</form>

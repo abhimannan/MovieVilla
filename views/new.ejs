@@ -1,0 +1,39 @@
+<% layout('./layout/boilarplate.ejs') -%>
+
+<div class="container my-5">
+  <h2 class="text-center mb-4">Add a New Movie</h2>
+  <form action="/addNew" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+    
+    <div class="mb-3">
+      <label for="title" class="form-label">Enter Title</label>
+      <input type="text" class="form-control" name="Movie[title]" id="title" required>
+      <div class="invalid-feedback">Please enter a title.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="imageURL" class="form-label">Enter Image</label>
+      <input type="file" class="form-control" name="Movie[imageURL]" id="imageURL">
+      <div class="invalid-feedback">Image Uploade</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="director" class="form-label">Enter Director</label>
+      <input type="text" class="form-control" name="Movie[director]" id="director" required>
+      <div class="invalid-feedback">Please enter the director's name.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="rating" class="form-label">Enter Rating</label>
+      <input type="number" class="form-control" name="Movie[rating]" id="rating" required min="0" max="10">
+      <div class="invalid-feedback">Please enter a valid rating (0 to 10).</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="hero" class="form-label">Enter Hero Name</label>
+      <input type="text" class="form-control" name="Movie[hero]" id="hero" required>
+      <div class="invalid-feedback">Please enter the hero's name.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add New Movie</button>
+  </form>
+</div>
