@@ -375,10 +375,10 @@ app.delete("/movies/:id/reviews/:reviewID",
     resp.redirect(`/movies/${id}`);
 });
 
-app.all("*", (req, res, next) => {
-    // You can pass a custom error to your error handler
-    next(new ExpressError(404,"Page Not Found"));
-});
+// app.all("*", (req, res, next) => {
+//     // You can pass a custom error to your error handler
+//     next(new ExpressError(404,"Page Not Found"));
+// });
 
 // testing route
 app.get("/demo",(req,resp,next)=>{
